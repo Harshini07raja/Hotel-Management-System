@@ -1,0 +1,1 @@
+{"algorithm":"Snowflake-64bit (41b ts, 10b worker/dc, 12b seq)","totalGenerated":50000,"threads":16,"collisions":0,"durationSeconds":0.072,"throughputIdsPerSec":692581,"avgLatencyMicros":1.44}

@@ -1,0 +1,19 @@
+{
+  "workload": "LOW",
+  "virtualUsers": 10,
+  "durationSeconds": 10.03,
+  "totalRequests": 4188,
+  "successfulRequests": 2999,
+  "failedRequests": 0,
+  "http429RateLimited": 0,
+  "throughputRps": 417.5,
+  "avgResponseTimeMs": 11.93,
+  "p50Ms": 6.87,
+  "p95Ms": 28.6,
+  "p99Ms": 44.89,
+  "errorRatePercentage": 0.0,
+  "statusCodes": {
+    "200": 2999,
+    "403": 1189
+  }
+}

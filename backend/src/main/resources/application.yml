@@ -1,0 +1,64 @@
+server:
+  port: 8088
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  application:
+    name: hotel-management-system
+  data:
+    mongodb:
+      # Shard 0 (default connection string)
+      uri: mongodb://localhost:27017/hotel_shard_0
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 2000ms
+
+hotel:
+  sharding:
+    enabled: true
+    base-uri: mongodb://localhost:27017
+    shards:
+      - id: "shard-0"
+        database: "hotel_shard_0"
+        weight: 1
+      - id: "shard-1"
+        database: "hotel_shard_1"
+        weight: 1
+      - id: "shard-2"
+        database: "hotel_shard_2"
+        weight: 1
+  security:
+    jwt:
+      secret: "hotelManagementSystemSuperSecretJwtKey2026MustBeAtLeast256BitsLong!"
+      expiration-ms: 86400000 # 24 hours
+  rate-limiter:
+    enabled: true
+    default-capacity: 60 # 60 tokens
+    default-refill-tokens: 60
+    default-refill-period-seconds: 60
+    login-capacity: 10 # 10 attempts
+    booking-capacity: 20
+  snowflake:
+    worker-id: 1
+    datacenter-id: 1
+  crawler:
+    crawl-delay-ms: 200
+    mock-base-url: http://localhost:8080/mock-hotels
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+
+spring doc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html

@@ -1,0 +1,4 @@
+Workload,VirtualUsers,DurationSec,TotalRequests,Successful,RateLimited429,ThroughputRPS,AvgLatencyMs,p50Ms,p95Ms,p99Ms,ErrorRatePct
+LOW,10,10.03,4188,2999,0,417.5,11.93,6.87,28.6,44.89,0.0
+MEDIUM,50,10.05,10785,7740,0,1073.56,27.54,25.59,48.15,65.21,0.0
+HIGH,100,10.07,10358,7475,0,1028.43,63.88,60.91,111.48,140.13,0.0

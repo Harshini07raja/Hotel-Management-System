@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================
+   Aurevia Hotels & Resorts — Global CSS Design System
+   Brand: Deep Forest Green (#142820) + Champagne Gold (#E6D2A2)
+   Background: Warm Ivory (#F7F1E7)
+   ========================================================= */
+
+:root {
+  /* Brand colour tokens */
+  --color-forest:       #142820;
+  --color-forest-light: #1e3d2f;
+  --color-forest-dark:  #0d1d15;
+  --color-gold:         #E6D2A2;
+  --color-gold-dark:    #c9b67f;
+  --color-gold-light:   #f2e8cc;
+  --color-ivory:        #F7F1E7;
+  --color-ivory-dark:   #ede4d4;
+  --color-charcoal:     #1C1C1C;
+  --color-muted:        #6B7280;
+  --color-border:       #E5DDD0;
+  --color-surface:      #FFFFFF;
+
+  /* Typography */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    Inter, system-ui, -apple-system, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Spacing */
+  --page-max-width: 1280px;
+  --page-padding-x: clamp(1rem, 4vw, 2rem);
+}
+
+/* ── Base Resets ─────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-ivory);
+  color: var(--color-charcoal);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Typography ──────────────────────────────────────────── */
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* Display headings */
+.text-display-xl { font-size: clamp(2.5rem, 6vw, 4.5rem); }
+.text-display-lg { font-size: clamp(2rem, 4vw, 3.2rem); }
+.text-display-md { font-size: clamp(1.6rem, 3vw, 2.4rem); }
+.text-display-sm { font-size: clamp(1.25rem, 2vw, 1.75rem); }
+
+/* ── Aurevia Component Classes ───────────────────────────── */
+
+/* Primary button — forest green */
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl
+         bg-aurevia-forest text-aurevia-gold font-semibold text-sm
+         hover:bg-aurevia-forest-light transition-all duration-200
+         focus:outline-none focus:ring-2 focus:ring-aurevia-gold/50 focus:ring-offset-2
+         disabled:opacity-50 disabled:cursor-not-allowed shadow-aurevia;
+}
+
+/* Gold accent button */
+.btn-gold {
+  @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl
+         bg-aurevia-gold text-aurevia-forest font-semibold text-sm
+         hover:bg-aurevia-gold-dark transition-all duration-200
+         focus:outline-none focus:ring-2 focus:ring-aurevia-forest/30 focus:ring-offset-2
+         disabled:opacity-50 disabled:cursor-not-allowed shadow-gold;
+}
+
+/* Ghost button */
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl
+         border border-aurevia-border text-aurevia-forest font-medium text-sm
+         hover:bg-aurevia-ivory-dark transition-all duration-200
+         focus:outline-none focus:ring-2 focus:ring-aurevia-forest/20;
+}
+
+/* Text link button */
+.btn-link {
+  @apply inline-flex items-center gap-1.5 text-aurevia-forest font-semibold text-sm
+         hover:text-aurevia-forest-light transition-colors underline-offset-4
+         hover:underline;
+}
+
+/* Danger button */
+.btn-danger {
+  @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl
+         bg-rose-50 text-rose-700 border border-rose-200 font-medium text-sm
+         hover:bg-rose-100 transition-all duration-200;
+}
+
+/* ── Card Components ─────────────────────────────────────── */
+.card {
+  @apply bg-white rounded-2xl border border-aurevia-border shadow-aurevia-sm
+         transition-shadow duration-200;
+}
+
+.card-hover {
+  @apply card hover:shadow-aurevia-md;
+}
+
+.card-padding {
+  @apply p-6;
+}
+
+/* ── Form Elements ───────────────────────────────────────── */
+.input-field {
+  @apply w-full px-4 py-3 rounded-xl border border-aurevia-border bg-white
+         text-aurevia-charcoal placeholder-aurevia-muted text-sm
+         focus:outline-none focus:ring-2 focus:ring-aurevia-forest/30 focus:border-aurevia-forest
+         transition-all duration-200;
+}
+
+.input-label {
+  @apply block text-xs font-semibold text-aurevia-charcoal mb-1.5 tracking-wide uppercase;
+}
+
+/* ── Badges ──────────────────────────────────────────────── */
+.badge {
+  @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold;
+}
+
+.badge-green  { @apply badge bg-emerald-100 text-emerald-800 border border-emerald-200; }
+.badge-gold   { @apply badge bg-aurevia-gold/30 text-aurevia-forest border border-aurevia-gold; }
+.badge-amber  { @apply badge bg-amber-100 text-amber-800 border border-amber-200; }
+.badge-rose   { @apply badge bg-rose-100 text-rose-800 border border-rose-200; }
+.badge-blue   { @apply badge bg-blue-100 text-blue-800 border border-blue-200; }
+.badge-purple { @apply badge bg-purple-100 text-purple-800 border border-purple-200; }
+.badge-slate  { @apply badge bg-slate-100 text-slate-700 border border-slate-200; }
+
+/* ── Page Layout ─────────────────────────────────────────── */
+.page-container {
+  @apply min-h-screen bg-aurevia-ivory;
+}
+
+.page-section {
+  @apply max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* ── Skeleton Shimmer ────────────────────────────────────── */
+.skeleton {
+  @apply bg-gradient-to-r from-aurevia-ivory-dark via-aurevia-ivory to-aurevia-ivory-dark
+         bg-[length:200%_100%] animate-shimmer rounded-xl;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-ivory); }
+::-webkit-scrollbar-thumb { background: var(--color-gold-dark); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-forest-light); }
+
+/* ── Focus Ring ──────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-forest);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Print ───────────────────────────────────────────────── */
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; color: black; }
+}

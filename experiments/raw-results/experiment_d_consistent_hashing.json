@@ -1,0 +1,1 @@
+{"sampleKeyCount":10000,"initialNodeCount":3,"newNodeAdded":"hotel-node-4","moduloHashing":{"keysMoved":7502,"percentageMoved":75.02,"theoreticalExpectedPct":75.0},"consistentHashing":{"keysMoved":2442,"percentageMoved":24.42,"theoreticalExpectedPct":25.0},"reductionInKeyMovement":"50.6% less keys migrated"}

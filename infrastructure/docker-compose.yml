@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  # Shard 0 (Primary Catalog & Default)
+  mongo-shard-0:
+    image: mongo:7.0
+    container_name: hotel-mongo-shard-0
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_shard_0_data:/data/db
+
+  # Shard 1 (Secondary Partition)
+  mongo-shard-1:
+    image: mongo:7.0
+    container_name: hotel-mongo-shard-1
+    restart: always
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_shard_1_data:/data/db
+
+  # Shard 2 (Tertiary Partition)
+  mongo-shard-2:
+    image: mongo:7.0
+    container_name: hotel-mongo-shard-2
+    restart: always
+    ports:
+      - "27019:27017"
+    volumes:
+      - mongo_shard_2_data:/data/db
+
+  # Redis Cache & Rate Limiting Key-Value Store
+  redis:
+    image: redis:7.2-alpine
+    container_name: hotel-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  # Prometheus Telemetry Collector
+  prometheus:
+    image: prom/prometheus:v2.51.0
+    container_name: hotel-prometheus
+    restart: always
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    depends_on:
+      - backend
+
+  # Grafana Dashboard Visualization
+  grafana:
+    image: grafana/grafana:10.4.0
+    container_name: hotel-grafana
+    restart: always
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    depends_on:
+      - prometheus
+
+  # Backend Modular Monolith
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    container_name: hotel-backend
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo-shard-0:27017/hotel_shard_0
+      - HOTEL_SHARDING_BASE_URI=mongodb://mongo-shard-0:27017
+      - SPRING_DATA_REDIS_HOST=redis
+      - SPRING_DATA_REDIS_PORT=6379
+    depends_on:
+      - mongo-shard-0
+      - redis
+
+  # React Frontend (Vite)
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    container_name: hotel-frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  mongo_shard_0_data:
+  mongo_shard_1_data:
+  mongo_shard_2_data:
+  redis_data:
